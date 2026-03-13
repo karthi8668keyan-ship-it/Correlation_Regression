@@ -20,10 +20,58 @@ If y represents the dependent variable and x the independent variable, this rela
 ![image](https://user-images.githubusercontent.com/104613195/168225866-ac8f6610-bdc3-4ac2-a24e-2b24ba08e189.png)
 
 # Program :
+~~~
+import numpy as np
+import matplotlib.pyplot as plt
 
-![image](https://github.com/ramjan1729/Correlation_Regression/assets/103921593/9eb48cbf-8ca3-4cd9-8440-ff45fd98333e)
+print("Enter X values:")
+X = np.array([int(i) for i in input().split()])
 
+print("Enter Y values:")
+Y = np.array([int(i) for i in input().split()])
+
+N = len(X)
+
+SumX = np.sum(X)
+SumY = np.sum(Y)
+SumX2 = np.sum(X**2)
+SumY2 = np.sum(Y**2)
+SumXY = np.sum(X*Y)
+
+# Means
+MeanX = SumX/N
+MeanY = SumY/N
+
+# Correlation coefficient
+num = (N*SumXY) - (SumX*SumY)
+den = np.sqrt((N*SumX2 - SumX**2) * (N*SumY2 - SumY**2))
+r = num/den
+
+print("Coefficient of Correlation r =", round(r,3))
+
+# Regression coefficient
+b = num / (N*SumX2 - SumX**2)
+
+print(f"Regression line Y on X: Y = {b:.3f}(X - {MeanX:.3f}) + {MeanY:.3f}")
+
+# Regression function
+def reg(x):
+    return MeanY + b*(x-MeanX)
+
+# Graph
+plt.scatter(X,Y)
+plt.plot(sorted(X),reg(np.array(sorted(X))))
+plt.xlabel("X")
+plt.ylabel("Y")
+plt.title("Regression Line")
+plt.grid(True)
+plt.show()
+~~~
+# Output 
+
+![WhatsApp Image 2026-03-13 at 4 22 32 PM](https://github.com/user-attachments/assets/31944e32-8e1c-4a4a-8964-b1a3f7436252)
 
 # Result
 
-# Output 
+Thus the program is implemented and executed successfully.
+
